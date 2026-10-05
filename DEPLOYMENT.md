@@ -76,6 +76,7 @@ Scroll down to the **Environment Variables** section and add the following keys:
 | `BOOTSTRAP_ADMIN_PASSWORD` | `YourSecurePassword123!` | Must be at least 12 characters long |
 | `CORS_ORIGINS` | `https://your-frontend.vercel.app` | Exact URL of your frontend (set this after Vercel deployment) |
 | `GEMINI_API_KEY` | `AIzaSy...` | *(Optional)* Google Gemini API key for the AI assistant |
+| `GEMINI_MODEL` | `gemini-3.6-flash` | Latest active production model for AI Studio (default: `gemini-3.6-flash`) |
 
 > [!TIP]
 > **Generating a secure `JWT_SECRET_KEY`:**
