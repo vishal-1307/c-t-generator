@@ -278,6 +278,8 @@ def assistant_chat(
                 )
             if last_err:
                 logger.warning("All Gemini model attempts failed (%s); falling back to deterministic assistant", last_err)
+        except Exception as exc:
+            logger.warning("Gemini API call failed (%s); falling back to deterministic assistant", exc)
 
     # Deterministic fallback
     reply, actions = _deterministic_respond(payload.message, facts)
