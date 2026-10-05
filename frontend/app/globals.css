@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/*
+  The conventions this app already follows, written down.
+
+  Forty-odd files repeat the same literals - slate for structure, emerald for
+  good, red for blocking, amber for caution, blue for information - and they
+  agree with each other only because each was copied from the last. Naming
+  them changes nothing on screen today: every token below resolves to the
+  colour already in use. What it buys is one place to answer "what does a
+  blocker look like", which is the prerequisite for the later phases touching
+  these screens, and a way to tell a deliberate colour from an accidental one.
+
+  Since then this has become the redesign: one accent, a content measure, a
+  focus ring, and a type scale, all named here so a screen cannot invent its
+  own. Structure and status keep the values they always had.
+*/
+@theme {
+  /* Structure: surfaces, borders and text, lightest to darkest. */
+  --color-surface: var(--color-white);
+  --color-surface-sunken: var(--color-slate-50);
+  --color-surface-hover: var(--color-slate-100);
+  --color-line: var(--color-slate-200);
+  --color-line-strong: var(--color-slate-300);
+  --color-ink-faint: var(--color-slate-400);
+  --color-ink-muted: var(--color-slate-500);
+  --color-ink-soft: var(--color-slate-600);
+  --color-ink: var(--color-slate-900);
+
+  /* Status. The vocabulary the validation and generate screens already use:
+     a blocker stops the timetable, a warning does not. */
+  --color-ok: var(--color-emerald-600);
+  --color-ok-surface: var(--color-emerald-50);
+  --color-ok-line: var(--color-emerald-200);
+  --color-blocker: var(--color-red-600);
+  --color-blocker-surface: var(--color-red-50);
+  --color-blocker-line: var(--color-red-200);
+  --color-caution: var(--color-amber-600);
+  --color-caution-surface: var(--color-amber-50);
+  --color-caution-line: var(--color-amber-200);
+  --color-info: var(--color-blue-600);
+  --color-info-surface: var(--color-blue-50);
+  --color-info-line: var(--color-blue-200);
+
+  /* The height of the fixed top bar. Referenced by the rail and the mobile
+     drawer so all three cannot disagree about where the page starts. */
+  --spacing-topbar: 3.5rem;
+  /* The phone's bottom navigation, for the same reason. */
+  --spacing-bottomnav: 3.75rem;
+
+  /* The one accent. Everything the reader is meant to press is this colour and
+     nothing else is - which is why Export stopped being its own green. Change
+     these five lines and the whole product changes colour. */
+  --color-accent: var(--color-blue-700);
+  --color-accent-hover: var(--color-blue-800);
+  --color-accent-surface: var(--color-blue-50);
+  --color-accent-line: var(--color-blue-200);
+  --color-accent-ink: var(--color-white);
+
+  /* Keyboard focus. One ring, everywhere, never removed. */
+  --color-ring: var(--color-blue-600);
+
+  /* The measure. Wider than this and a line of text stops being readable and
+     the eye loses the column; the result table opts out deliberately. */
+  --container-content: 72rem;
+}
+
+/*
+  Focus is not optional. Six files styled it before; this covers the rest,
+  including anything added later, and `:focus-visible` keeps it off the mouse.
+*/
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/*
+  Respect a reader who has asked their system to stop moving things. The
+  motion below is functional, and all of it stops here.
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/*
+  Motion, where it says something happened: a notice arriving, a card that
+  just appeared, a panel sliding in, work in progress. Short, and all of it
+  clamped by the reduced-motion rule above.
+*/
+@keyframes notice-in {
+  from {
+    opacity: 0;
+    transform: translateX(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.375rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(250%);
+  }
+}
+.notice-enter {
+  animation: notice-in 200ms ease-out;
+}
+.rise-enter {
+  animation: rise-in 200ms ease-out;
+}
+.fade-enter {
+  animation: fade-in 150ms ease-out;
+}
+.drawer-enter {
+  animation: slide-in-right 200ms ease-out;
+}
+.indeterminate-bar {
+  animation: indeterminate 1.4s ease-in-out infinite;
+}

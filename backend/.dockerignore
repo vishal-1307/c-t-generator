@@ -1,0 +1,13 @@
+# Never ship these into the image: they are large, local-only, or secret.
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.db
+*.sqlite*
+.env
+.env.*
+!.env.example
+*.log
+tests/
+scripts/

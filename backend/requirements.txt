@@ -1,0 +1,24 @@
+fastapi>=0.115
+uvicorn[standard]>=0.32
+sqlalchemy>=2.0
+pydantic>=2.9
+pydantic-settings>=2.6
+python-dotenv>=1.0
+ortools>=9.11
+reportlab>=4.2
+openpyxl>=3.1
+# openpyxl parses workbook XML with this when it is installed, which refuses
+# entity-expansion and external-entity tricks in an uploaded file.
+defusedxml>=0.7,<0.8
+pytest>=8.3
+httpx>=0.27
+python-multipart>=0.0.9
+alembic>=1.13
+pyjwt>=2.9
+bcrypt>=4.0,<5.0
+# Required for DATABASE_URL=postgresql+psycopg://... - SQLAlchemy has no
+# driver of its own. Optional for SQLite-only development.
+psycopg[binary]>=3.1
+google-generativeai>=0.8.0
+requests>=2.31.0
+
