@@ -51,4 +51,4 @@ EXPOSE 8000
 # add generation throughput - they would only let two solves start at once on
 # the same box and compete for the same cores. Scale by making the instance
 # bigger, or run a second instance behind the load balancer for read traffic.
-CMD ["sh", "-c", "alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1 --timeout-keep-alive 65"]
+CMD ["sh", "-c", "alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-${X_ZOHO_CATALYST_LISTEN_PORT:-8000}} --workers 1 --timeout-keep-alive 65"]
