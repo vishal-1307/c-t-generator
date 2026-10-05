@@ -99,7 +99,7 @@ class Settings(BaseSettings):
 
     # Solver defaults (phases 3-5). Overridable per generate request.
     solver_max_seconds: float = 60.0
-    solver_workers: int = 8
+    solver_workers: int = 1
     # DEFAULT 0 = do not set CP-SAT's max_memory_in_mb, because measurement
     # showed it does not do what it was added to do.
     #

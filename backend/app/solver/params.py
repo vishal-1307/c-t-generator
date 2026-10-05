@@ -20,7 +20,7 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class SolverParams:
     max_seconds: float = 60.0
-    workers: int = 8
+    workers: int = 1
     max_memory_mb: int = 0
     probing_level: int = 0
     random_seed: int | None = None

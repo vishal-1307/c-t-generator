@@ -57,3 +57,5 @@ Thumbs.db
 # Scratch & temporary testing artifacts
 scratch/
 uploads/
+*.zip
+test_*.py
