@@ -98,8 +98,10 @@ class Settings(BaseSettings):
     max_upload_bytes: int = 10 * 1024 * 1024
 
     # Solver defaults (phases 3-5). Overridable per generate request.
-    solver_max_seconds: float = 60.0
-    solver_workers: int = 1
+    # Workers=4 is safe on Standard plan (2GB RAM). Override via
+    # SOLVER_WORKERS env var: set to 1 for Free tier (512MB), 8 for larger.
+    solver_max_seconds: float = 120.0
+    solver_workers: int = 4
     # DEFAULT 0 = do not set CP-SAT's max_memory_in_mb, because measurement
     # showed it does not do what it was added to do.
     #
@@ -181,7 +183,10 @@ class Settings(BaseSettings):
     # run is not a matter of taste. 0 removes the cap.
     faculty_max_consecutive: int = 6
 
-    w_gap: int = 25
+    # Gap weight is the highest because students' #1 complaint is idle
+    # periods between classes. At 50 the solver will strongly prefer
+    # compact schedules over every other soft preference.
+    w_gap: int = 50
     w_spread: int = 3
     w_repeat: int = 5
     # What a period over the preferred run length costs, against the others.

@@ -19,12 +19,12 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class SolverParams:
-    max_seconds: float = 60.0
-    workers: int = 1
+    max_seconds: float = 120.0
+    workers: int = 4
     max_memory_mb: int = 0
     probing_level: int = 0
     random_seed: int | None = None
-    w_gap: int = 25
+    w_gap: int = 50
     w_spread: int = 3
     w_repeat: int = 5
     w_long_run: int = 15
